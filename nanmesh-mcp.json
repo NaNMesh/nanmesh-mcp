@@ -1,0 +1,53 @@
+{
+  "name": "nanmesh-catalog",
+  "version": "1.0.0",
+  "displayName": "NaN Mesh Product Catalog",
+  "description": "Gives Claude access to the NaN Mesh AI-native product catalog. Search products, get AI-optimized Agent Cards, get ranked recommendations, and submit feedback — all from natural language.",
+  "homepage": "https://nanmesh.com",
+  "transport": {
+    "type": "stdio",
+    "command": "node",
+    "args": ["./build/index.js"]
+  },
+  "env": {
+    "NANMESH_API_URL": {
+      "description": "Base URL of the NaN Mesh backend API",
+      "default": "http://localhost:8000",
+      "required": false
+    },
+    "NANMESH_API_KEY": {
+      "description": "Optional X-API-Key for write operations (feedback submission)",
+      "required": false
+    }
+  },
+  "tools": [
+    {
+      "name": "search_products",
+      "description": "Search the NaN Mesh product catalog by keyword. Returns AI summaries, pricing, and confidence scores."
+    },
+    {
+      "name": "get_agent_card",
+      "description": "Fetch the full AI-optimized Agent Card for a product — includes recommended_for, pricing plans, key features, trust signals."
+    },
+    {
+      "name": "recommend_products",
+      "description": "Get AI-ranked product recommendations with explanation for each result. Better than raw search for answering 'what should I use for X'."
+    },
+    {
+      "name": "list_products",
+      "description": "List all catalog products, optionally filtered by category."
+    },
+    {
+      "name": "get_categories",
+      "description": "List available product categories with counts."
+    },
+    {
+      "name": "get_products_changed_since",
+      "description": "Get products updated after a timestamp — for cache sync."
+    },
+    {
+      "name": "submit_feedback",
+      "description": "Submit a rating and review for a product. Improves trust score and recommendation ranking."
+    }
+  ]
+}

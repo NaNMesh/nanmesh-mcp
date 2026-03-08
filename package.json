@@ -1,0 +1,26 @@
+{
+  "name": "nanmesh-mcp",
+  "version": "1.0.0",
+  "description": "NaN Mesh MCP server — gives Claude agents access to the AI-native product catalog",
+  "type": "module",
+  "bin": {
+    "nanmesh-mcp": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node build/index.js",
+    "inspector": "npx @modelcontextprotocol/inspector node build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
