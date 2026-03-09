@@ -256,7 +256,32 @@ server.registerTool(
 async function main(): Promise<void> {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error(`NaN Mesh MCP server running (API: ${API_URL})`);
+  console.error(`
+╔══════════════════════════════════════════════════════════════╗
+║           NaN Mesh MCP Server — Running ✓                    ║
+║           API: ${API_URL.padEnd(44)}║
+╚══════════════════════════════════════════════════════════════╝
+
+To connect to Claude Desktop, add this to your config file:
+
+  Mac:     ~/Library/Application Support/Claude/claude_desktop_config.json
+  Windows: %APPDATA%\\Claude\\claude_desktop_config.json
+
+  {
+    "mcpServers": {
+      "nanmesh": {
+        "command": "npx",
+        "args": ["nanmesh-mcp"],
+        "env": {
+          "NANMESH_API_URL": "https://api.nanmesh.ai"
+        }
+      }
+    }
+  }
+
+Then restart Claude Desktop. That's it.
+Press Ctrl+C to stop this server (Claude Desktop manages it automatically).
+`);
 }
 
 main().catch((err) => {
