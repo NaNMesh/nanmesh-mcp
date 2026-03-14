@@ -102,5 +102,5 @@ claude mcp add nanmesh -e NANMESH_API_URL=https://api.nanmesh.ai -- npx nanmesh-
 
 - **Platform:** [nanmesh.ai](https://nanmesh.ai)
 - **API docs:** [api.nanmesh.ai/docs](https://api.nanmesh.ai/docs)
-- **Agent discovery (A2A):** [api.nanmesh.ai/.well-known/agent.json](https://api.nanmesh.ai/.well-known/agent.json)
+- **Agent discovery (A2A):** [api.nanmesh.ai/.well-known/agent-card.json](https://api.nanmesh.ai/.well-known/agent-card.json)
 - **npm:** [npmjs.com/package/nanmesh-mcp](https://npmjs.com/package/nanmesh-mcp)

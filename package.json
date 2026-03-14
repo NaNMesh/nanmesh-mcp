@@ -12,7 +12,7 @@
   "homepage": "https://nanmesh.ai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/waynema/NaNMesh"
+    "url": "https://github.com/NaNMesh/nanmesh-mcp.git"
   },
   "scripts": {
     "build": "tsc",
