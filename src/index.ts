@@ -107,7 +107,7 @@ const FeedbackSchema = z.object({
 // ── Tool registrations ────────────────────────────────────────────────────────
 
 server.registerTool(
-  "search_products",
+  "nanmesh_search",
   {
     title: "Search NaN Mesh Product Catalog",
     description:
@@ -127,7 +127,7 @@ server.registerTool(
 );
 
 server.registerTool(
-  "get_agent_card",
+  "nanmesh_get_agent_card",
   {
     title: "Get Product Agent Card",
     description:
@@ -146,7 +146,7 @@ server.registerTool(
 );
 
 server.registerTool(
-  "recommend_products",
+  "nanmesh_recommend",
   {
     title: "Get AI-Ranked Product Recommendations",
     description:
@@ -171,7 +171,7 @@ server.registerTool(
 );
 
 server.registerTool(
-  "list_products",
+  "nanmesh_list_products",
   {
     title: "List NaN Mesh Products",
     description:
@@ -189,7 +189,7 @@ server.registerTool(
 );
 
 server.registerTool(
-  "get_categories",
+  "nanmesh_get_categories",
   {
     title: "List Product Categories",
     description:
@@ -204,7 +204,7 @@ server.registerTool(
 );
 
 server.registerTool(
-  "get_products_changed_since",
+  "nanmesh_get_changed_since",
   {
     title: "Get Products Updated Since Timestamp",
     description:
@@ -220,7 +220,7 @@ server.registerTool(
 );
 
 server.registerTool(
-  "get_discovery_report",
+  "nanmesh_get_discovery_report",
   {
     title: "Get AI Discovery Report",
     description:
@@ -236,7 +236,7 @@ server.registerTool(
 );
 
 server.registerTool(
-  "submit_feedback",
+  "nanmesh_submit_feedback",
   {
     title: "Submit Product Feedback",
     description:
@@ -247,6 +247,63 @@ server.registerTool(
   },
   async ({ agent_id, product_id, rating, review, use_case }: z.infer<typeof FeedbackSchema>) => {
     const data = await apiPost("/feedback", { agent_id, product_id, rating, review, use_case });
+    return { content: [{ type: "text" as const, text: toText(data) }] };
+  }
+);
+
+// ── Product listing schemas ──────────────────────────────────────────────────
+
+const StartListingSchema = z.object({
+  user_id: z.string().describe("User identifier (any unique string for the person listing)"),
+});
+
+const ContinueListingSchema = z.object({
+  conversation_id: z.string().describe("Conversation ID from nanmesh_start_listing"),
+  message: z.string().describe("Describe the product — name, features, pricing, use cases, etc."),
+});
+
+// ── Product listing tools ───────────────────────────────────────────────────
+
+server.registerTool(
+  "nanmesh_start_listing",
+  {
+    title: "Start Product Listing",
+    description:
+      "Start listing a new product on NaN Mesh via AI conversation. Free, no auth required. " +
+      "Returns a conversation_id and a welcome message. Then use nanmesh_continue_listing to " +
+      "describe the product in natural language — the AI extracts all structured data automatically. " +
+      "The product becomes searchable and recommendable by all AI agents once submitted.",
+    inputSchema: StartListingSchema,
+    annotations: {
+      title: "Start Product Listing",
+      readOnlyHint: false,
+      openWorldHint: false,
+    },
+  },
+  async ({ user_id }: z.infer<typeof StartListingSchema>) => {
+    const data = await apiPost("/chat/onboarding/start", { user_id });
+    return { content: [{ type: "text" as const, text: toText(data) }] };
+  }
+);
+
+server.registerTool(
+  "nanmesh_continue_listing",
+  {
+    title: "Continue Product Listing",
+    description:
+      "Continue a product listing conversation. Send product details in natural language. " +
+      "The AI agent extracts structured data (name, category, pricing, features, use cases). " +
+      "Keep sending messages until confidence_score reaches 0.7 or higher, then the product " +
+      "can be submitted. Check extracted_data in the response to see what's been captured so far.",
+    inputSchema: ContinueListingSchema,
+    annotations: {
+      title: "Continue Product Listing",
+      readOnlyHint: false,
+      openWorldHint: false,
+    },
+  },
+  async ({ conversation_id, message }: z.infer<typeof ContinueListingSchema>) => {
+    const data = await apiPost(`/chat/onboarding/${encodeURIComponent(conversation_id)}`, { user_input: message });
     return { content: [{ type: "text" as const, text: toText(data) }] };
   }
 );
