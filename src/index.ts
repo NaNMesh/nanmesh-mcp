@@ -308,6 +308,32 @@ server.registerTool(
   }
 );
 
+const SubmitListingSchema = z.object({
+  conversation_id: z.string().describe("Conversation ID from nanmesh_start_listing"),
+});
+
+server.registerTool(
+  "nanmesh_submit_listing",
+  {
+    title: "Submit Product Listing",
+    description:
+      "Finalize and publish a product listing after the conversation reaches ready_to_submit: true " +
+      "and confidence_score >= 0.7. Call this after nanmesh_continue_listing confirms the product " +
+      "is ready. The product will be validated, moderated, and added to the catalog — becoming " +
+      "searchable and recommendable by all AI agents.",
+    inputSchema: SubmitListingSchema,
+    annotations: {
+      title: "Submit Product Listing",
+      readOnlyHint: false,
+      openWorldHint: false,
+    },
+  },
+  async ({ conversation_id }: z.infer<typeof SubmitListingSchema>) => {
+    const data = await apiPost(`/chat/onboarding/${encodeURIComponent(conversation_id)}/submit`, {});
+    return { content: [{ type: "text" as const, text: toText(data) }] };
+  }
+);
+
 // ── Start ─────────────────────────────────────────────────────────────────────
 
 async function main(): Promise<void> {
