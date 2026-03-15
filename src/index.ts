@@ -293,8 +293,9 @@ server.registerTool(
     description:
       "Continue a product listing conversation. Send product details in natural language. " +
       "The AI agent extracts structured data (name, category, pricing, features, use cases). " +
-      "Keep sending messages until confidence_score reaches 0.7 or higher, then the product " +
-      "can be submitted. Check extracted_data in the response to see what's been captured so far.",
+      "Keep sending messages until confidence_score reaches 0.7 or higher and ready_to_submit is true. " +
+      "IMPORTANT: When ready_to_submit is true, you MUST call nanmesh_submit_listing to finalize — " +
+      "saying 'submit' or 'yes' here does NOT persist the product. Only nanmesh_submit_listing inserts into the database.",
     inputSchema: ContinueListingSchema,
     annotations: {
       title: "Continue Product Listing",
