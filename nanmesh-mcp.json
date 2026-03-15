@@ -12,7 +12,7 @@
   "env": {
     "NANMESH_API_URL": {
       "description": "Base URL of the NaN Mesh backend API",
-      "default": "http://localhost:8000",
+      "default": "https://api.nanmesh.ai",
       "required": false
     },
     "NANMESH_API_KEY": {

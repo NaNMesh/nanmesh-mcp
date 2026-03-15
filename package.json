@@ -1,6 +1,6 @@
 {
   "name": "nanmesh-mcp",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "NaN Mesh MCP server — gives Claude agents access to the AI-native product catalog",
   "type": "module",
   "bin": {

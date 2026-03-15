@@ -6,7 +6,7 @@
  * search, discover, and recommend products without any manual API wiring.
  *
  * Configure via env:
- *   NANMESH_API_URL  — base URL of the NaN Mesh backend (default: http://localhost:8000)
+ *   NANMESH_API_URL  — base URL of the NaN Mesh backend (default: https://api.nanmesh.ai)
  *   NANMESH_API_KEY  — optional X-API-Key for write operations
  */
 
@@ -14,7 +14,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
-const API_URL = (process.env.NANMESH_API_URL ?? "http://localhost:8000").replace(/\/$/, "");
+const API_URL = (process.env.NANMESH_API_URL ?? "https://api.nanmesh.ai").replace(/\/$/, "");
 const API_KEY = process.env.NANMESH_API_KEY ?? "";
 
 // ── HTTP helpers ──────────────────────────────────────────────────────────────
