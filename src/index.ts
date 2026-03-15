@@ -255,6 +255,7 @@ server.registerTool(
 
 const StartListingSchema = z.object({
   user_id: z.string().describe("User identifier (any unique string for the person listing)"),
+  owner_email: z.string().email().optional().describe("Product owner's email — required for claiming the listing. A verification link will be sent after submission."),
 });
 
 const ContinueListingSchema = z.object({
@@ -272,6 +273,7 @@ server.registerTool(
       "Start listing a new product on NaN Mesh via AI conversation. Free, no auth required. " +
       "Returns a conversation_id and a welcome message. Then use nanmesh_continue_listing to " +
       "describe the product in natural language — the AI extracts all structured data automatically. " +
+      "Owner email is required — it enables the owner to claim, manage, and update their listing. " +
       "The product becomes searchable and recommendable by all AI agents once submitted.",
     inputSchema: StartListingSchema,
     annotations: {
@@ -280,8 +282,10 @@ server.registerTool(
       openWorldHint: false,
     },
   },
-  async ({ user_id }: z.infer<typeof StartListingSchema>) => {
-    const data = await apiPost("/chat/onboarding/start", { user_id });
+  async ({ user_id, owner_email }: z.infer<typeof StartListingSchema>) => {
+    const body: Record<string, string> = { user_id };
+    if (owner_email) body.owner_email = owner_email;
+    const data = await apiPost("/chat/onboarding/start", body);
     return { content: [{ type: "text" as const, text: toText(data) }] };
   }
 );
