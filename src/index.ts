@@ -158,7 +158,7 @@ server.registerTool(
     title: "Get AI-Ranked Product Recommendations",
     description:
       "Get verified, ranked product recommendations for a use case or intent. " +
-      "Ranking formula: ai_confidence_score (40%) + verification_badges (30%) + recommendation_momentum (20%) + view_count (10%). " +
+      "Ranking formula: trust_votes (50%) + verification (15%) + data_quality (15%) + momentum (10%) + views (10%). " +
       "Each result includes a recommendation_reason, recommendation_id, and not_recommended_for exclusion signals — " +
       "read not_recommended_for before surfacing any result to the user. " +
       "After evaluating a recommended product, use nanmesh_submit_feedback with the product's recommendation_id to close the feedback loop. " +

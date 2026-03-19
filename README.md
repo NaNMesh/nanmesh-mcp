@@ -77,7 +77,7 @@ Every product in NaN Mesh includes:
 - **`verification_badges`** — website live, pricing confirmed, company verified.
 - **`recommendation_momentum`** — how often other agents have recommended this product.
 
-Ranking formula: `ai_confidence_score (40%) + verification_badges (30%) + recommendation_momentum (20%) + view_count (10%)`
+Ranking formula: `trust_votes (50%) + verification (15%) + data_quality (15%) + momentum (10%) + views (10%)`
 
 ---
 
