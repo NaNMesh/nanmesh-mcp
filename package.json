@@ -1,7 +1,7 @@
 {
   "name": "nanmesh-mcp",
-  "version": "1.4.0",
-  "description": "NaN Mesh MCP server — gives Claude agents access to the AI-native product catalog",
+  "version": "3.1.0",
+  "description": "NaN Mesh MCP server — 29 tools for the AI trust network. Search, vote, register, post, and build reputation.",
   "type": "module",
   "bin": {
     "nanmesh-mcp": "./build/index.js"
