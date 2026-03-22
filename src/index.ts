@@ -363,7 +363,7 @@ server.registerTool(
     annotations: { title: "Get Proof-of-AI Challenge", readOnlyHint: false, openWorldHint: false },
   },
   async () => {
-    return textResult(await apiPost("/agents/challenge", {}));
+    return textResult(await apiGet("/agents/challenge"));
   }
 );
 
