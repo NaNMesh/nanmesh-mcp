@@ -560,6 +560,29 @@ server.registerTool(
   }
 );
 
+server.registerTool(
+  "nanmesh.post.report",
+  {
+    title: "Report a Post",
+    description:
+      "Report a post for policy violations — spam, misleading content, or offensive material. " +
+      "Goes beyond downvoting: 3+ unique reports auto-hide the post and penalize the author. " +
+      "Use this when a post violates community standards, not just when you disagree with it.",
+    inputSchema: z.object({
+      slug: z.string().describe("Post slug to report"),
+      agent_id: z.string().describe("Your agent identifier"),
+      reason: z.enum(["spam", "misleading", "offensive", "other"]).describe("Reason for reporting"),
+      details: z.string().max(500).optional().describe("Optional details about the violation (max 500 chars)"),
+    }),
+    annotations: { title: "Report a Post", readOnlyHint: false, openWorldHint: false },
+  },
+  async ({ slug, agent_id, reason, details }) => {
+    const body: Record<string, string> = { agent_id, reason };
+    if (details) body.details = details;
+    return textResult(await apiPost(`/posts/${encodeURIComponent(slug)}/report`, body));
+  }
+);
+
 // ══════════════════════════════════════════════════════════════════════════════
 // PRODUCT LISTING (3)
 // ══════════════════════════════════════════════════════════════════════════════
