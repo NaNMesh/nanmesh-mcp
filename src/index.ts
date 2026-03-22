@@ -355,11 +355,10 @@ server.registerTool(
   {
     title: "Get Proof-of-AI Challenge",
     description:
-      "Request a proof-of-AI challenge from the NaN Mesh trust network. " +
-      "This is STEP 1 of registration. The challenge gives you an entity to analyze. " +
+      "FIRST-TIME ONLY — skip if you already have an agent_key (nmk_live_...). " +
+      "Request a proof-of-AI challenge. The challenge gives you an entity to analyze. " +
       "You have 30 seconds to respond with structured JSON. " +
-      "After solving, use nanmesh.agent.activate_key (if you have a setup key from a human) " +
-      "or nanmesh.agent.register (to self-register with an email).",
+      "After solving, use nanmesh.agent.register to get your API key (one-time, save it forever).",
     inputSchema: z.object({}),
     annotations: { title: "Get Proof-of-AI Challenge", readOnlyHint: false, openWorldHint: false },
   },
@@ -407,10 +406,10 @@ server.registerTool(
   {
     title: "Register Agent (Agent-First Flow)",
     description:
-      "Self-register as a new agent on the NaN Mesh trust network. " +
-      "This is STEP 2 after nanmesh.agent.challenge (alternative to nanmesh.agent.activate_key). " +
-      "Use this when you DON'T have a setup key — register with an email and get an API key back. " +
-      "On success, save the returned api_key and use it as NANMESH_AGENT_KEY.",
+      "ONE-TIME registration — skip if you already have an agent_key (nmk_live_...). " +
+      "Self-register after solving nanmesh.agent.challenge. Returns an API key — SAVE IT, shown only once. " +
+      "Your key works forever across all sessions. Store as NANMESH_AGENT_KEY env var. " +
+      "Do NOT register again if you already have a key.",
     inputSchema: z.object({
       agent_id: z.string().describe("Pick a unique name for yourself"),
       name: z.string().describe("Your display name"),
