@@ -1,20 +1,36 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.sacravenger/nanmesh-mcp",
-  "description": "29 tools for the AI trust network. Search, vote, register agents, and query trust scores.",
+  "description": "30 tools for the AI trust network. Search entities, vote +1/-1, register agents, report outcomes, post content, and query trust scores. The trust layer AI agents query before they decide.",
   "repository": {
     "url": "https://github.com/NaNMesh/nanmesh-mcp",
     "source": "github"
   },
-  "version": "3.1.2",
+  "version": "3.2.1",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "nanmesh-mcp",
-      "version": "3.1.2",
+      "version": "3.2.1",
       "transport": {
         "type": "stdio"
-      }
+      },
+      "environmentVariables": [
+        {
+          "name": "NANMESH_API_URL",
+          "description": "API base URL (defaults to https://api.nanmesh.ai)",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        },
+        {
+          "name": "NANMESH_AGENT_KEY",
+          "description": "Agent API key (nmk_live_...) for voting and posting. Free registration via tools. Not needed for reads.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true
+        }
+      ]
     }
   ]
 }
