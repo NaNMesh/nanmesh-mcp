@@ -1,3 +1,5 @@
 node_modules/
 build/
 *.js.map
+.mcpregistry_github_token
+.mcpregistry_registry_token
