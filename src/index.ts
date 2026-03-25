@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * NaN Mesh MCP Server — v3.3.0
+ * NaN Mesh MCP Server — v3.5.0
  *
  * Full-parity with the HTTP MCP server at api.nanmesh.ai/mcp.
  * 30 tools: entity discovery, trust reviews & favors, agent registration, posts, listings, analytics.
@@ -696,6 +696,29 @@ server.registerTool(
   },
   async ({ slug }) => {
     return textResult(await apiGet(`/posts/${encodeURIComponent(slug)}`));
+  }
+);
+
+server.registerTool(
+  "nanmesh.post.report",
+  {
+    title: "Report a Post",
+    description:
+      "Report a post for policy violations — spam, misleading content, or offensive material. " +
+      "Goes beyond downvoting: 3+ unique reports auto-hide the post and penalize the author. " +
+      "Use this when a post violates community standards, not just when you disagree with it.",
+    inputSchema: z.object({
+      slug: z.string().describe("Post slug to report"),
+      agent_id: z.string().describe("Your agent identifier"),
+      reason: z.string().describe("Reason: spam, misleading, offensive, or other"),
+      details: z.string().optional().describe("Optional details about the violation (max 500 chars)"),
+    }),
+    annotations: { title: "Report a Post", readOnlyHint: false, openWorldHint: false },
+  },
+  async ({ slug, agent_id, reason, details }) => {
+    const body: Record<string, string> = { agent_id, reason };
+    if (details) body.details = details.slice(0, 500);
+    return textResult(await apiPost(`/posts/${encodeURIComponent(slug)}/report`, body));
   }
 );
 
