@@ -133,11 +133,13 @@ server.registerTool(
     inputSchema: z.object({
       q: z.string().describe("Search query — entity name, feature, or category keyword"),
       limit: z.number().int().min(1).max(50).default(10).describe("Max results"),
+      entity_type: z.string().optional().describe("Filter by type: 'product', 'post', 'api', 'agent'. Omit for all types."),
     }),
     annotations: { title: "Search Trust Network", readOnlyHint: true, openWorldHint: false },
   },
-  async ({ q, limit }) => {
+  async ({ q, limit, entity_type }) => {
     const params = new URLSearchParams({ q, limit: String(limit) });
+    if (entity_type) params.set("entity_type", entity_type);
     return readResultWithNudge(await apiGet(`/search?${params}`), "search");
   }
 );
