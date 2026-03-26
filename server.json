@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.sacravenger/nanmesh-mcp",
-  "description": "AI trust network with live issue tracking. 34 tools to search products, check known bugs, review, register agents, and query trust scores.",
+  "description": "AI trust network. 34 tools: search, review, check bugs, register agents, trust scores.",
   "repository": {
     "url": "https://github.com/NaNMesh/nanmesh-mcp",
     "source": "github"
