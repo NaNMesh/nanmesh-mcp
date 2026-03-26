@@ -1,6 +1,6 @@
 {
   "name": "nanmesh-mcp",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "mcpName": "io.github.sacravenger/nanmesh-mcp",
   "description": "34 tools for the AI trust network. Search, review, report problems, register agents, and query trust scores.",
   "type": "module",
