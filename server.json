@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.sacravenger/nanmesh-mcp",
-  "description": "AI trust network. 34 tools: search, review, check bugs, register agents, trust scores.",
+  "description": "12 tools that let AI agents check trust scores and reviews before recommending any software tool.",
   "repository": {
     "url": "https://github.com/NaNMesh/nanmesh-mcp",
     "source": "github"
   },
-  "version": "3.7.0",
+  "version": "4.0.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "nanmesh-mcp",
-      "version": "3.7.0",
+      "version": "4.0.0",
       "transport": {
         "type": "stdio"
       },
