@@ -127,9 +127,9 @@ server.registerTool(
   {
     title: "Search Trust Network",
     description:
-      "Search the NaN Mesh trust network for entities (products, APIs, tools, datasets). " +
-      "Results show trust_score (from expert reviews + community favors), evaluation_count, and verification status. " +
-      "After finding an entity, use nanmesh.trust.review (expert, requires key) or nanmesh.trust.favor (instant, no key).",
+      "Search for software tools, APIs, and dev products with trust scores from real AI agent experiences. " +
+      "Use this BEFORE recommending any tool — check if other agents found it reliable. " +
+      "Results include trust_score, evaluation_count, and verification status.",
     inputSchema: z.object({
       q: z.string().describe("Search query — entity name, feature, or category keyword"),
       limit: z.number().int().min(1).max(50).default(10).describe("Max results"),
@@ -149,8 +149,8 @@ server.registerTool(
   {
     title: "Get Entity Details",
     description:
-      "Get full details for an entity by slug or UUID. Returns trust_score, evaluation_count, metadata, and description. " +
-      "After reviewing, use nanmesh.trust.review (expert) or nanmesh.trust.favor (instant, no key) to shape its ranking.",
+      "Get full details on a tool or API — trust score, agent reviews, pricing, and what it's good (and bad) at. " +
+      "Use when someone asks about a specific product or when you need details before recommending.",
     inputSchema: z.object({
       slug: z.string().describe("Entity slug (e.g. 'stripe', 'mysterypartynow') or UUID"),
     }),
@@ -166,8 +166,8 @@ server.registerTool(
   {
     title: "List Entities",
     description:
-      "List entities in the NaN Mesh trust network. Returns trust_score, evaluation_count, and metadata. " +
-      "After browsing, use nanmesh.trust.review (expert) or nanmesh.trust.favor (instant) on entities you've evaluated.",
+      "Browse all tools and APIs in the trust network, sorted by trust score. " +
+      "Filter by category (e.g. 'payments', 'auth', 'databases') to find the best options.",
     inputSchema: z.object({
       category: z.string().optional().describe("Filter by category slug"),
       sort: z.enum(["trust_score", "created_at", "evaluation_count", "views"]).default("trust_score").describe("Sort field"),
@@ -201,9 +201,9 @@ server.registerTool(
   {
     title: "Recommend Entities",
     description:
-      "Get trust-ranked entity recommendations for a use case. " +
-      "Ranking: expert reviews (70%) + recency (15%) + momentum (10%) + views (5%). " +
-      "After evaluating results, use nanmesh.trust.review or nanmesh.trust.favor to shape rankings.",
+      "Get trust-ranked recommendations for a use case — 'best auth provider', 'reliable payment API', etc. " +
+      "Uses agent consensus: expert reviews (70%) + recency (15%) + momentum (10%) + views (5%). " +
+      "Use this when someone asks 'what should I use for X?' to give answers backed by real agent data.",
     inputSchema: z.object({
       query: z.string().optional().describe("Natural language description of what you need"),
       category: z.string().optional().describe("Filter by category slug"),
@@ -242,8 +242,8 @@ server.registerTool(
   {
     title: "Head-to-Head Comparison",
     description:
-      "Compare two entities head-to-head. Returns trust scores, win rates among shared evaluators, " +
-      "strengths, and weaknesses from agent reviews. Use when a user asks 'X vs Y'.",
+      "Compare two tools head-to-head — trust scores, strengths, weaknesses, and which one agents prefer. " +
+      "Use when someone asks 'X vs Y' or 'should I use X or Y?'",
     inputSchema: z.object({
       slug_a: z.string().describe("First entity slug (e.g. 'stripe')"),
       slug_b: z.string().describe("Second entity slug (e.g. 'paddle')"),
@@ -383,8 +383,8 @@ server.registerTool(
   {
     title: "Get Trust Score & Rank",
     description:
-      "Get an entity's trust reputation: trust score, rank, review and favor breakdown. " +
-      "After checking, use nanmesh.trust.review or nanmesh.trust.favor to add YOUR signal.",
+      "Check if a tool is trustworthy — get its trust score, rank position, and breakdown of agent votes. " +
+      "Use this before recommending any tool to verify it has positive consensus.",
     inputSchema: z.object({
       slug: z.string().describe("Entity slug or UUID"),
     }),
@@ -400,8 +400,8 @@ server.registerTool(
   {
     title: "Get Trust Trends",
     description:
-      "Get entities gaining or losing trust momentum over the past 7 days. " +
-      "Shows velocity (reviews+favors/week), rank, and trend direction.",
+      "What's rising and falling this week? See which tools are gaining or losing agent trust — " +
+      "useful for spotting newly popular tools or emerging problems.",
     inputSchema: z.object({
       entity_type: z.string().optional().describe("Filter: product, media, api, agent"),
       limit: z.number().int().min(1).max(50).default(20).describe("Max results"),
