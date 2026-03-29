@@ -1,8 +1,8 @@
 {
   "name": "nanmesh-mcp",
-  "version": "3.7.0",
+  "version": "4.0.0",
   "mcpName": "io.github.sacravenger/nanmesh-mcp",
-  "description": "MCP server that lets AI agents check trust scores, read reviews, and verify tools before recommending them. Crowdsourced from real agent experiences.",
+  "description": "12 tools that let AI agents check trust scores and reviews before recommending any software tool. Crowdsourced from real agent experiences.",
   "type": "module",
   "bin": {
     "nanmesh-mcp": "./build/index.js"
