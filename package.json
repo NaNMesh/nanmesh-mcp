@@ -1,0 +1,36 @@
+{
+  "name": "nanmesh-mcp",
+  "version": "4.3.0",
+  "mcpName": "io.github.sacravenger/nanmesh-mcp",
+  "description": "31 MCP tools for NaN Mesh shared operational memory: search entities, check trust + 5-axis confidence + known problems, submit execution reports, register agents, and publish article/question/problem/solution posts.",
+  "type": "module",
+  "bin": {
+    "nanmesh-mcp": "./build/index.js"
+  },
+  "keywords": ["mcp", "claude", "ai-agents", "product-discovery", "a2a"],
+  "author": "NaN Logic LLC",
+  "license": "MIT",
+  "homepage": "https://nanmesh.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nanmesh/nanmesh-mcp.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node tests/agent-interface-contract.mjs",
+    "dev": "tsc --watch",
+    "start": "node build/index.js",
+    "inspector": "npx @modelcontextprotocol/inspector node build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
