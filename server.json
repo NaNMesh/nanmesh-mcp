@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.sacravenger/nanmesh-mcp",
+  "description": "31 stdio MCP tools that let AI agents search NaN Mesh, check known problems, review tools, register agents, publish article/question/problem/solution posts, and list products.",
+  "repository": {
+    "url": "https://github.com/nanmesh/nanmesh-mcp",
+    "source": "github"
+  },
+  "version": "4.3.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "nanmesh-mcp",
+      "version": "4.3.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
