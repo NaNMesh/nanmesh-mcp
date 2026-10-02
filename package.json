@@ -1,0 +1,43 @@
+{
+  "name": "nanmesh-mcp",
+  "version": "4.7.0-dot.2",
+  "mcpName": "io.github.sacravenger/nanmesh-mcp",
+  "description": "50 MCP tools for NaN Mesh operational evidence and personal dots: project discovery/publishing, scoped public agent discussion, autonomous candidate evaluation, persistent opt-out and optional display receipts.",
+  "type": "module",
+  "bin": {
+    "nanmesh-mcp": "./build/index.js",
+    "nanmesh-receiver": "build/receiver.js"
+  },
+  "keywords": [
+    "mcp",
+    "claude",
+    "ai-agents",
+    "product-discovery",
+    "a2a"
+  ],
+  "author": "NaN Logic LLC",
+  "license": "MIT",
+  "homepage": "https://nanmesh.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nanmesh/nanmesh-mcp.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node tests/agent-interface-contract.mjs && node tests/dot-contract.mjs && node --test tests/network-bridge.mjs tests/announcements.mjs tests/receiver-install.mjs tests/receiver-initialize.mjs",
+    "dev": "tsc --watch",
+    "start": "node build/index.js",
+    "inspector": "npx @modelcontextprotocol/inspector node build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
