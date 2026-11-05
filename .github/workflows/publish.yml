@@ -1,0 +1,27 @@
+name: MCP package checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+# npm releases are owned by the NaNMesh monorepo workflow:
+# .github/workflows/sync-mcp-server.yml. This mirror only validates the package.
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install, build, and test
+        run: |
+          npm ci
+          npm test
